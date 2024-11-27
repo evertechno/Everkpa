@@ -113,7 +113,34 @@ task_type = st.selectbox("Select the task you want to automate:", [
     "Face Recognition",
     "Voice Command Automation",
     "Medical Data Processing",
-    "Product Recommendation Systems"
+    "Product Recommendation Systems",
+    "VR Experience Generation",
+    "Real-time Data Monitoring",
+    "Predictive Analytics",
+    "Automated Video Editing",
+    "AI Chatbot Integration",
+    "Natural Language Processing (NLP) Tasks",
+    "Robotic Process Automation (RPA)",
+    "Predictive Maintenance Alerts",
+    "Smart Contract Management",
+    "Supply Chain Risk Assessment",
+    "Virtual Assistant with ML",
+    "Real-time Speech Translation",
+    "AI-Powered Document Analysis",
+    "AI-Powered Content Moderation",
+    "Automated A/B Testing",
+    "Personalized Marketing Campaign",
+    "Real-Time Speech-to-Text",
+    "Cloud Data Integration",
+    "Data Privacy Compliance",
+    "Dynamic Task Scheduling",
+    "Custom Workflow Automation",
+    "Automated Customer Onboarding",
+    "AI-Assisted Report Generation",
+    "AI-Powered Fraud Detection",
+    "AI-Powered Legal Analytics",
+    "Voice Biometric Authentication",
+    "Customer Experience Analytics"
 ])
 
 # Inputs based on selected task
@@ -201,115 +228,115 @@ elif task_type == "Data Labeling":
 elif task_type == "OCR (Optical Character Recognition)":
     ocr_image = st.file_uploader("Upload image for OCR:", type=["png", "jpg", "jpeg"])
 elif task_type == "Data Enrichment":
-    enrichment_data = st.file_uploader("Upload data for enrichment:", type=["csv"])
+    enrichment_data_file = st.file_uploader("Upload dataset for enrichment:", type=["csv"])
 elif task_type == "Language Detection":
-    lang_detect_text = st.text_area("Enter text for language detection:")
+    language_text = st.text_area("Enter text for language detection:")
 elif task_type == "Resume Screening":
     resume_file = st.file_uploader("Upload resume for screening:", type=["pdf", "docx"])
 elif task_type == "Job Matching":
-    job_matching_data = st.file_uploader("Upload job data for matching:", type=["csv"])
+    job_description = st.text_area("Enter job description for matching:")
 elif task_type == "Automated Testing":
-    test_script = st.text_area("Enter test script for automation:")
+    testing_script = st.text_area("Enter test case for automation:")
 elif task_type == "Data Clustering":
-    clustering_data_file = st.file_uploader("Upload data for clustering:", type=["csv"])
+    clustering_data = st.file_uploader("Upload data for clustering:", type=["csv"])
 elif task_type == "Content Moderation":
-    moderation_text = st.text_area("Enter content for moderation:")
+    moderation_text = st.text_area("Enter text for moderation:")
 elif task_type == "Social Media Monitoring":
-    social_media_query = st.text_input("Enter social media query:")
+    social_media_data = st.file_uploader("Upload social media data:", type=["csv"])
 elif task_type == "Customer Sentiment Analysis":
-    customer_feedback = st.text_area("Enter customer feedback for sentiment analysis:")
+    sentiment_text = st.text_area("Enter customer feedback for sentiment analysis:")
 elif task_type == "Email Filtering":
-    email_text = st.text_area("Enter email text for filtering:")
+    email_data_file = st.file_uploader("Upload email data:", type=["csv"])
 elif task_type == "Speech Recognition":
-    speech_recognition_file = st.file_uploader("Upload audio for speech recognition:", type=["mp3", "wav"])
+    speech_recognition_file = st.file_uploader("Upload speech file:", type=["mp3", "wav"])
 elif task_type == "Personal Assistant":
-    assistant_task = st.text_input("Enter your request for the assistant:")
+    assistant_query = st.text_input("Ask the personal assistant:")
 elif task_type == "Code Generation":
-    code_prompt = st.text_area("Enter description for code generation:")
+    code_request = st.text_area("Describe the code you need:")
 elif task_type == "Report Summarization":
-    report_file = st.file_uploader("Upload report for summarization:", type=["txt", "pdf"])
+    report_text = st.text_area("Enter report text for summarization:")
 elif task_type == "Website Scraping":
-    website_url = st.text_input("Enter website URL for scraping:")
+    website_url = st.text_input("Enter the website URL to scrape:")
 elif task_type == "News Summarization":
-    news_article = st.text_area("Enter news article for summarization:")
+    news_text = st.text_area("Enter news text for summarization:")
 elif task_type == "Text Summarization":
-    text_input_for_summarization = st.text_area("Enter text for summarization:")
+    summary_text = st.text_area("Enter text for summarization:")
 elif task_type == "Content Filtering":
     content_filtering_text = st.text_area("Enter content for filtering:")
 elif task_type == "Customer Segmentation":
     segmentation_data = st.file_uploader("Upload data for segmentation:", type=["csv"])
 elif task_type == "Data Integration":
-    integration_file = st.file_uploader("Upload files for data integration:", type=["csv"])
+    integration_data_file = st.file_uploader("Upload data for integration:", type=["csv"])
 elif task_type == "Workflow Automation":
-    workflow_automation_task = st.text_input("Describe the workflow for automation:")
+    automation_task = st.text_input("Describe the automation task:")
 elif task_type == "Speech Analysis":
-    speech_analysis_file = st.file_uploader("Upload speech data for analysis:", type=["mp3", "wav"])
+    speech_analysis_file = st.file_uploader("Upload audio file for analysis:", type=["mp3", "wav"])
 elif task_type == "Data Mining":
-    mining_data_file = st.file_uploader("Upload data for mining:", type=["csv"])
+    mining_data = st.file_uploader("Upload data for mining:", type=["csv"])
 elif task_type == "Image Enhancement":
-    enhancement_image = st.file_uploader("Upload image for enhancement:", type=["png", "jpg", "jpeg"])
+    enhance_image = st.file_uploader("Upload image for enhancement:", type=["png", "jpg", "jpeg"])
 elif task_type == "Custom Chatbot Development":
-    chatbot_description = st.text_area("Describe the chatbot you need:")
+    chatbot_request = st.text_area("Describe the chatbot functionality:")
 elif task_type == "Document Redaction":
-    redact_document = st.file_uploader("Upload document for redaction:", type=["txt", "pdf"])
+    redaction_file = st.file_uploader("Upload document for redaction:", type=["txt", "pdf"])
 elif task_type == "Web Search Automation":
-    web_search_query = st.text_input("Enter web search query:")
+    search_query = st.text_input("Enter search query:")
 elif task_type == "Lead Generation":
-    lead_gen_data = st.file_uploader("Upload data for lead generation:", type=["csv"])
+    lead_generation_query = st.text_area("Describe the lead generation process:")
 elif task_type == "Customer Support Ticket Classification":
-    support_ticket_data = st.file_uploader("Upload customer support ticket data:", type=["csv"])
+    ticket_text = st.text_area("Enter customer support ticket text:")
 elif task_type == "Document Indexing":
     indexing_document = st.file_uploader("Upload document for indexing:", type=["txt", "pdf"])
 elif task_type == "Predictive Maintenance":
-    maintenance_data = st.file_uploader("Upload predictive maintenance data:", type=["csv"])
+    maintenance_data = st.file_uploader("Upload maintenance data:", type=["csv"])
 elif task_type == "E-commerce Product Categorization":
-    product_data = st.file_uploader("Upload product data for categorization:", type=["csv"])
+    ecom_data = st.file_uploader("Upload product data:", type=["csv"])
 elif task_type == "Expense Report Analysis":
-    expense_data = st.file_uploader("Upload expense report data:", type=["csv"])
+    expense_data = st.file_uploader("Upload expense report:", type=["csv"])
 elif task_type == "Market Basket Analysis":
-    market_basket_data = st.file_uploader("Upload market basket data:", type=["csv"])
+    basket_data = st.file_uploader("Upload market basket data:", type=["csv"])
 elif task_type == "Supply Chain Optimization":
     supply_chain_data = st.file_uploader("Upload supply chain data:", type=["csv"])
 elif task_type == "Healthcare Diagnostics":
     healthcare_data = st.file_uploader("Upload healthcare data:", type=["csv"])
 elif task_type == "HR Process Automation":
-    hr_data = st.file_uploader("Upload HR data:", type=["csv"])
+    hr_data = st.file_uploader("Upload HR process data:", type=["csv"])
 elif task_type == "Text-based Games":
-    game_description = st.text_area("Describe the text-based game:")
+    game_input = st.text_area("Enter game scenario:")
 elif task_type == "Visual Question Answering":
-    vqa_image = st.file_uploader("Upload image for VQA:", type=["png", "jpg", "jpeg"])
+    vqa_image = st.file_uploader("Upload image for visual question answering:", type=["png", "jpg", "jpeg"])
 elif task_type == "Visual Search":
     search_image = st.file_uploader("Upload image for visual search:", type=["png", "jpg", "jpeg"])
 elif task_type == "AI Chatbots for Surveys":
-    survey_description = st.text_area("Describe the survey:")
+    survey_query = st.text_area("Describe survey for chatbot:")
 elif task_type == "Customer Behavior Analysis":
-    behavior_data = st.file_uploader("Upload customer behavior data:", type=["csv"])
+    behavior_data = st.file_uploader("Upload customer data:", type=["csv"])
 elif task_type == "Price Optimization":
-    price_optimization_data = st.file_uploader("Upload data for price optimization:", type=["csv"])
+    pricing_data = st.file_uploader("Upload pricing data:", type=["csv"])
 elif task_type == "Text-to-Image Generation":
-    text_to_image_prompt = st.text_area("Describe the image you want to generate:")
+    text_for_image = st.text_area("Enter text for image generation:")
 elif task_type == "Customer Data Aggregation":
     customer_data = st.file_uploader("Upload customer data:", type=["csv"])
 elif task_type == "Dynamic Pricing Strategy":
-    pricing_data = st.file_uploader("Upload pricing strategy data:", type=["csv"])
+    pricing_strategy_data = st.file_uploader("Upload pricing strategy data:", type=["csv"])
 elif task_type == "Smart Document Management":
-    document_management_data = st.file_uploader("Upload document management data:", type=["csv"])
+    document_management_file = st.file_uploader("Upload document for management:", type=["txt", "pdf"])
 elif task_type == "Voice-to-Text Translation":
-    voice_to_text_file = st.file_uploader("Upload audio for voice-to-text translation:", type=["mp3", "wav"])
+    voice_text_file = st.file_uploader("Upload voice file for translation:", type=["mp3", "wav"])
 elif task_type == "Image Style Transfer":
-    style_transfer_image = st.file_uploader("Upload image for style transfer:", type=["png", "jpg", "jpeg"])
+    image_for_style_transfer = st.file_uploader("Upload image for style transfer:", type=["png", "jpg", "jpeg"])
 elif task_type == "Automated Data Reporting":
-    report_generation_data = st.file_uploader("Upload data for report generation:", type=["csv"])
+    reporting_data = st.file_uploader("Upload data for reporting:", type=["csv"])
 elif task_type == "AI-Powered Business Intelligence":
-    bi_data = st.file_uploader("Upload business intelligence data:", type=["csv"])
+    business_data = st.file_uploader("Upload business data:", type=["csv"])
 elif task_type == "Legal Document Automation":
     legal_document = st.file_uploader("Upload legal document:", type=["txt", "pdf"])
 elif task_type == "Invoice Processing":
-    invoice_data = st.file_uploader("Upload invoice data:", type=["csv"])
+    invoice_file = st.file_uploader("Upload invoice:", type=["pdf", "jpg"])
 elif task_type == "Social Media Post Generation":
-    social_media_content = st.text_area("Enter content for social media posts:")
+    social_media_prompt = st.text_area("Describe social media post:")
 elif task_type == "Video Analytics":
-    video_data = st.file_uploader("Upload video for analytics:", type=["mp4", "avi"])
+    video_file = st.file_uploader("Upload video file for analytics:", type=["mp4"])
 elif task_type == "Face Recognition":
     face_recognition_image = st.file_uploader("Upload image for face recognition:", type=["png", "jpg", "jpeg"])
 elif task_type == "Voice Command Automation":
@@ -317,15 +344,70 @@ elif task_type == "Voice Command Automation":
 elif task_type == "Medical Data Processing":
     medical_data = st.file_uploader("Upload medical data:", type=["csv"])
 elif task_type == "Product Recommendation Systems":
-    recommendation_system_data = st.file_uploader("Upload data for product recommendation:", type=["csv"])
-
-# Button to start the task automation
-if st.button("Start Automation"):
-    with st.spinner("Processing... Please wait while the task is being automated..."):
-        try:
-            # Task handling and processing as in the original code...
-            # Add additional handling for all the new task types here
-            pass
-
-        except Exception as e:
-            st.error(f"Error: {e}")
+    recommendation_data = st.file_uploader("Upload product data:", type=["csv"])
+elif task_type == "VR Experience Generation":
+    vr_data = st.file_uploader("Upload VR data:", type=["csv"])
+elif task_type == "Real-time Data Monitoring":
+    monitoring_data = st.file_uploader("Upload monitoring data:", type=["csv"])
+elif task_type == "Predictive Analytics":
+    analytics_data = st.file_uploader("Upload data for predictive analytics:", type=["csv"])
+elif task_type == "Automated Video Editing":
+    video_edit_file = st.file_uploader("Upload video for editing:", type=["mp4"])
+elif task_type == "AI Chatbot Integration":
+    chatbot_integration_data = st.file_uploader("Upload chatbot data:", type=["json"])
+elif task_type == "Natural Language Processing (NLP) Tasks":
+    nlp_text = st.text_area("Enter text for NLP task:")
+elif task_type == "Robotic Process Automation (RPA)":
+    rpa_file = st.file_uploader("Upload RPA data:", type=["csv"])
+elif task_type == "Predictive Maintenance Alerts":
+    maintenance_alert_file = st.file_uploader("Upload data for maintenance alerts:", type=["csv"])
+elif task_type == "Smart Contract Management":
+    contract_file = st.file_uploader("Upload contract for management:", type=["pdf", "txt"])
+elif task_type == "Supply Chain Risk Assessment":
+    risk_assessment_data = st.file_uploader("Upload risk assessment data:", type=["csv"])
+elif task_type == "Virtual Assistant with ML":
+    ml_assistant_query = st.text_input("Ask the assistant:")
+elif task_type == "Real-time Speech Translation":
+    speech_translation_file = st.file_uploader("Upload speech file for translation:", type=["mp3", "wav"])
+elif task_type == "AI-Powered Document Analysis":
+    document_analysis_file = st.file_uploader("Upload document for analysis:", type=["pdf", "txt"])
+elif task_type == "AI-Powered Content Moderation":
+    moderation_file = st.file_uploader("Upload content for moderation:", type=["txt", "pdf"])
+elif task_type == "Automated A/B Testing":
+    ab_testing_data = st.file_uploader("Upload A/B testing data:", type=["csv"])
+elif task_type == "Employee Time Tracking":
+    time_tracking_data = st.file_uploader("Upload time tracking data:", type=["csv"])
+elif task_type == "Automated Invoice Validation":
+    invoice_validation_data = st.file_uploader("Upload invoice data:", type=["csv"])
+elif task_type == "Behavioral Targeting":
+    targeting_data = st.file_uploader("Upload behavioral targeting data:", type=["csv"])
+elif task_type == "Employee Feedback Analysis":
+    feedback_data = st.file_uploader("Upload employee feedback:", type=["csv"])
+elif task_type == "Data Labeling":
+    labeling_data = st.file_uploader("Upload data for labeling:", type=["csv"])
+elif task_type == "Speech Emotion Recognition":
+    speech_emotion_file = st.file_uploader("Upload speech file for emotion recognition:", type=["mp3", "wav"])
+elif task_type == "Automated Quality Assurance":
+    quality_assurance_file = st.file_uploader("Upload file for quality assurance:", type=["pdf", "jpg"])
+elif task_type == "AI-Powered Sales Forecasting":
+    forecasting_data = st.file_uploader("Upload sales data:", type=["csv"])
+elif task_type == "Smart Home Automation":
+    smart_home_data = st.file_uploader("Upload smart home data:", type=["csv"])
+elif task_type == "AI-Based Fraud Detection":
+    fraud_detection_data = st.file_uploader("Upload fraud detection data:", type=["csv"])
+elif task_type == "AI Chatbot for E-commerce":
+    e_commerce_chatbot_data = st.file_uploader("Upload e-commerce data:", type=["csv"])
+elif task_type == "Personalized Learning":
+    learning_data = st.file_uploader("Upload personalized learning data:", type=["csv"])
+elif task_type == "Automated Reporting":
+    automated_report_data = st.file_uploader("Upload data for automated reporting:", type=["csv"])
+elif task_type == "Social Media Insights":
+    insights_data = st.file_uploader("Upload social media insights data:", type=["csv"])
+elif task_type == "AI-powered News Aggregation":
+    news_data = st.file_uploader("Upload news data:", type=["csv"])
+elif task_type == "AI-Powered Data Analysis":
+    data_analysis_file = st.file_uploader("Upload data for analysis:", type=["csv"])
+elif task_type == "Voice-activated Virtual Assistant":
+    voice_assistant_command = st.text_input("Enter voice assistant command:")
+else:
+    st.write("Please select a task.")
