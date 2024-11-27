@@ -3,10 +3,8 @@ import google.generativeai as genai
 import pandas as pd
 import time
 import requests
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from datetime import datetime
+import io
 
 # Configure the API key securely from Streamlit's secrets
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
@@ -27,11 +25,11 @@ task_type = st.selectbox("Select the task you want to automate:", [
 
 # Inputs based on selected task
 if task_type == "Document Summarization":
-    document_text = st.text_area("Paste the document to summarize:")
+    document_file = st.file_uploader("Upload your document (txt/pdf):", type=["txt", "pdf"])
 elif task_type == "Customer Query Response":
     prompt = st.text_input("Enter your query:", "What is the status of my order?")
 elif task_type == "Data Extraction":
-    data = st.text_area("Provide the data to extract insights from:")
+    data_file = st.file_uploader("Upload a CSV file for data extraction:", type=["csv"])
 elif task_type == "Report Generation":
     data_points = st.text_area("Provide the data for the report generation:")
 elif task_type == "Task Scheduler":
@@ -46,7 +44,17 @@ if st.button("Start Automation"):
     with st.spinner("Processing... Please wait while the task is being automated..."):
         try:
             # If Document Summarization
-            if task_type == "Document Summarization" and document_text:
+            if task_type == "Document Summarization" and document_file:
+                # Extract text from document (text or pdf)
+                if document_file.type == "text/plain":
+                    document_text = str(document_file.read(), "utf-8")
+                elif document_file.type == "application/pdf":
+                    from PyPDF2 import PdfReader
+                    reader = PdfReader(io.BytesIO(document_file.read()))
+                    document_text = ""
+                    for page in reader.pages:
+                        document_text += page.extract_text()
+
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 response = model.generate_content(f"Summarize this document: {document_text}")
                 st.write("Summary:")
@@ -60,9 +68,11 @@ if st.button("Start Automation"):
                 st.write(response.text)
 
             # If Data Extraction
-            elif task_type == "Data Extraction" and data:
+            elif task_type == "Data Extraction" and data_file:
+                # Read the CSV file using pandas
+                data = pd.read_csv(data_file)
                 model = genai.GenerativeModel('gemini-1.5-flash')
-                response = model.generate_content(f"Extract key insights from this data: {data}")
+                response = model.generate_content(f"Extract key insights from this data: {data.head().to_string()}")
                 st.write("Extracted Insights:")
                 st.write(response.text)
 
@@ -98,7 +108,7 @@ if st.button("Start Automation"):
             # Example of storing the result in a CSV (as a placeholder for a database)
             result = {
                 "Task": task_type,
-                "Input": document_text if task_type == "Document Summarization" else prompt if task_type == "Customer Query Response" else data if task_type == "Data Extraction" else data_points,
+                "Input": document_text if task_type == "Document Summarization" else prompt if task_type == "Customer Query Response" else str(data) if task_type == "Data Extraction" else data_points,
                 "Result": response.text if task_type in ["Document Summarization", "Customer Query Response", "Data Extraction", "Report Generation"] else str(response.json())
             }
             df = pd.DataFrame([result])
@@ -108,33 +118,3 @@ if st.button("Start Automation"):
 
         except Exception as e:
             st.error(f"Error: {e}")
-
-# Function to send an email notification (Example: Notify about task completion)
-def send_email_notification(subject, body, to_email):
-    try:
-        sender_email = st.secrets["EMAIL_SENDER"]
-        sender_password = st.secrets["EMAIL_PASSWORD"]
-        
-        msg = MIMEMultipart()
-        msg['From'] = sender_email
-        msg['To'] = to_email
-        msg['Subject'] = subject
-        msg.attach(MIMEText(body, 'plain'))
-        
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login(sender_email, sender_password)
-        text = msg.as_string()
-        server.sendmail(sender_email, to_email, text)
-        server.quit()
-        st.success(f"Email sent to {to_email}.")
-    except Exception as e:
-        st.error(f"Error sending email: {e}")
-
-# Example: Send notification email when task is complete
-if st.button("Send Task Completion Email"):
-    send_email_notification(
-        subject="KPA Task Completed",
-        body="Your Knowledge Process Automation task has been completed successfully.",
-        to_email="recipient@example.com"  # Change to the recipient's email
-    )
