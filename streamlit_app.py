@@ -1,102 +1,65 @@
 import streamlit as st
-import google.generativeai as genai
-import pandas as pd
 import time
-import requests
-from datetime import datetime
-import io
+from io import StringIO
+import PyPDF2
 
-# Configure the API key securely from Streamlit's secrets
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+# Mock function for AI model or API call (replace with your actual function)
+def process_document(file):
+    # Example processing: just returns a simple summary or message.
+    time.sleep(2)  # Simulate a processing delay (e.g., AI model inference time)
+    if file.name.endswith(".txt"):
+        content = file.getvalue().decode("utf-8")
+        return f"Text file processed. Length of content: {len(content)} characters."
+    elif file.name.endswith(".pdf"):
+        # Read the first page of the PDF for simplicity
+        pdf_reader = PyPDF2.PdfReader(file)
+        first_page = pdf_reader.pages[0].extract_text()
+        return f"PDF processed. First page content: {first_page[:200]}..."  # Preview first 200 characters
+    else:
+        return "Unsupported file format. Please upload a .txt or .pdf file."
 
-# Streamlit App UI
-st.title("Knowledge Process Automation (KPA) as a Service")
-st.write("Automate complex, knowledge-intensive tasks using Generative AI, RPA, AI, and ML.")
+# Streamlit UI components
+st.title("Document Processing with AI")
+st.write("Upload a document (txt or pdf) for processing.")
 
-# Input: Select task type
-task_type = st.selectbox("Select the task you want to automate:", [
-    "Document Summarization", 
-    "Customer Query Response", 
-    "Data Extraction", 
-    "Report Generation", 
-    "Task Scheduler",
-    "Text Classification",
-    "Data Cleaning",
-    "Content Generation",
-    "Sentiment Analysis",
-    "Text Translation",
-    "Text-to-Speech",
-    "Speech-to-Text",
-    "Text Embedding",
-    "Image Captioning",
-    "Text Search",
-    "Voice Assistant",
-    "Question Answering",
-    "Named Entity Recognition",
-    "Document Classification",
-    "Keyword Extraction",
-    "File Conversion",
-    "Data Visualization",
-    "Predictive Modeling",
-    "Anomaly Detection",
-    "Time Series Forecasting",
-    "Predictive Maintenance",
-])
+# File uploader
+uploaded_file = st.file_uploader("Choose a file", type=["txt", "pdf"])
 
-# Inputs based on selected task
-if task_type == "Document Summarization":
-    document_file = st.file_uploader("Upload your document (txt/pdf):", type=["txt", "pdf"])
-elif task_type == "Customer Query Response":
-    prompt = st.text_input("Enter your query:", "What is the status of my order?")
-elif task_type == "Data Extraction":
-    data_file = st.file_uploader("Upload a CSV file for data extraction:", type=["csv"])
-elif task_type == "Report Generation":
-    data_points = st.text_area("Provide the data for the report generation:")
-elif task_type == "Task Scheduler":
-    schedule_time = st.time_input("Schedule time for task (HH:MM):", value=datetime.now().time())
-    task_action = st.selectbox("Select the task to schedule:", ["Summarize document", "Generate report", "Extract data"])
-elif task_type == "Text Classification":
-    text_input = st.text_area("Enter text for classification:")
-elif task_type == "Data Cleaning":
-    data_clean_file = st.file_uploader("Upload a dataset (csv) for cleaning:", type=["csv"])
-elif task_type == "Content Generation":
-    content_prompt = st.text_area("Provide a prompt for content generation:")
-elif task_type == "Sentiment Analysis":
-    sentiment_text = st.text_area("Enter text for sentiment analysis:")
-elif task_type == "Text Translation":
-    translation_text = st.text_area("Enter text to translate:")
-    target_language = st.selectbox("Select target language:", ["French", "Spanish", "German", "Chinese", "Arabic"])
-elif task_type == "Text-to-Speech":
-    tts_text = st.text_area("Enter text for text-to-speech conversion:")
-elif task_type == "Speech-to-Text":
-    audio_file = st.file_uploader("Upload audio file for speech-to-text:", type=["mp3", "wav"])
-elif task_type == "Text Embedding":
-    embedding_text = st.text_area("Enter text for generating embedding:")
-elif task_type == "Image Captioning":
-    image_file = st.file_uploader("Upload an image for captioning:", type=["png", "jpg", "jpeg"])
-elif task_type == "Text Search":
-    search_query = st.text_input("Enter search query:")
-elif task_type == "Voice Assistant":
-    voice_assistant_query = st.text_input("Ask the assistant:")
-elif task_type == "Question Answering":
-    question_text = st.text_area("Enter question:")
-elif task_type == "Named Entity Recognition":
-    ner_text = st.text_area("Enter text for named entity recognition:")
-elif task_type == "Document Classification":
-    doc_class_text = st.text_area("Enter document for classification:")
-elif task_type == "Keyword Extraction":
-    keyword_text = st.text_area("Enter text for keyword extraction:")
-elif task_type == "File Conversion":
-    file_upload = st.file_uploader("Upload file for conversion:", type=["pdf", "docx", "txt"])
-elif task_type == "Data Visualization":
-    visualization_data = st.file_uploader("Upload CSV for data visualization:", type=["csv"])
-elif task_type == "Predictive Modeling":
-    model_data = st.file_uploader("Upload data for predictive modeling:", type=["csv"])
-elif task_type == "Anomaly Detection":
-    anomaly_data = st.file_uploader("Upload dataset for anomaly detection:", type=["csv"])
-elif task_type == "Time Series Forecasting":
-    timeseries_data = st.file_uploader("Upload time-series data:", type=["csv"])
-elif task_type == "Predictive Maintenance":
-    maintenance_data = st.file_uploader("Upload maintenance data:", type=["csv"])
+if uploaded_file is not None:
+    # Display the uploaded file name
+    st.write(f"Uploaded file: {uploaded_file.name}")
+    
+    # Display file preview for text files
+    if uploaded_file.name.endswith(".txt"):
+        file_content = uploaded_file.getvalue().decode("utf-8")
+        st.text_area("File Preview", file_content, height=150)
+    
+    elif uploaded_file.name.endswith(".pdf"):
+        # PDF file preview (first 200 characters of the first page)
+        with open(uploaded_file.name, "wb") as f:
+            f.write(uploaded_file.getvalue())
+        st.text_area("File Preview", "First 200 characters of the PDF: " + process_document(uploaded_file)[:200], height=150)
+    
+    # Button to trigger the processing
+    if st.button("Process File"):
+        with st.spinner('Processing your file...'):
+            result = process_document(uploaded_file)
+        
+        # Display the processed result
+        st.success("File processed successfully!")
+        st.write(result)
+
+# Additional UI for text input if no file is uploaded
 else:
-    st.write("Please select a task.")
+    st.write("Or, input some text directly for processing.")
+    user_input = st.text_area("Enter your text here", height=200)
+    
+    # Process button for manual text input
+    if st.button("Process Text"):
+        if user_input.strip():
+            with st.spinner('Processing your input text...'):
+                time.sleep(2)  # Simulating processing time
+                st.success("Text processed successfully!")
+                st.write(f"Processed text: {user_input[:200]}...")  # Show a preview of the processed text
+        else:
+            st.warning("Please enter some text before processing.")
